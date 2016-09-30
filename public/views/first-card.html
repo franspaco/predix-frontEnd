@@ -1,6 +1,64 @@
 <px-card header-text='Menu 1'>
 
-    <h3>First Card</h3>
+    <h3>Engine Data</h3>
+    <px-card header-text='Actual state and predictions'>
+    <px-dropdown id= 'engineDrop' display-value="Choose an engine..."><px-dropdown-content extend-dropdown='true' extend-dropdown-by='25' max-cont-character-width='10' items={{engineSe}}></px-dropdown-content></px-dropdown>
+
+    <px-card header-text='Engine info'>
+        <h4>{{engineSer}}</h4>
+        <h4>{{engineRout}}</h4>
+        <h4>{{engineCycle}}</h4>
+        <h4>{{engineTime}}</h4>
+
+    </px-card>
 
 
+    <px-vis-xy-chart
+        id="engineChart"
+        chart-data={{cyclesInGraph}}
+
+        width="741"
+        height="304"
+        margin='{ "top": "30", "bottom": "60", "left": "75", "right": "20" }'
+        x-axis-config='{"title": "Cycles",
+                        "labelPosition": "center",
+                        "orientation": "bottom"}'
+        y-axis-config='{"title": "Index",
+                        "labelPosition": "center",
+                        "orientation": "left"}'
+        register-config='{
+                            "height": 50,
+                            "type": "horizontal"}'
+        series-config='{
+                        "firstSerie": {
+                        "type": "scatter",
+                        "name": "Index",
+                        "xAxisUnit": "Cycles",
+                        "yAxisUnit": "index",
+                        "x": "cycle",
+                        "y":"index"
+                        }
+                        }'
+        default-series-config='{
+                                "x": "Cycles",
+                                "xMin": "dynamic",
+                                "xMax": "dynamic",
+                                "yMin": "dynamic",
+                                "yMax": "dynamic"
+                                    }'
+
+    >
+    </px-vis-xy-chart>
+
+
+    <h3>{{engineTable}}</h3>
+
+
+    <px-data-table table-data="{{cyclesInGraph}}" striped="true" filterable="true" enable-column-reorder="true" enable-column-resize="true">
+
+    </px-data-table>
+
+
+
+</px-card>
 </px-card>
