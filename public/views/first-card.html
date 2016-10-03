@@ -1,14 +1,15 @@
-<px-card header-text='Menu 1'>
+<px-card header-text='Engine Statistics and Predictions'>
 
-    <h3>Engine Data</h3>
-    <px-card header-text='Actual state and predictions'>
+    <px-card header-text='Query data:'>
+    <h3>Engine select:</h3>
     <px-dropdown id= 'engineDrop' display-value="Choose an engine..."><px-dropdown-content extend-dropdown='true' extend-dropdown-by='25' max-cont-character-width='10' items={{engineSe}}></px-dropdown-content></px-dropdown>
-
+    <h3>Preventive cycles</h3>
+    <input id="prevCycles" type="number" name="quantity" min="1" max="50" value="10">
     <px-card header-text='Engine info'>
-        <h4>{{engineSer}}</h4>
-        <h4>{{engineRout}}</h4>
-        <h4>{{engineCycle}}</h4>
-        <h4>{{engineTime}}</h4>
+        <p><h3>Serial:</h3> {{engineSer}}</>
+        <p><h3>Ruta:</h3> {{engineRout}}</p>
+        <p><h3>Ciclo actual:</h3> {{engineCycle}}</p>
+        <p><h3>Tiempo sobre 263°:</h3> {{engineTime}} minutos</p>
 
     </px-card>
 
@@ -39,6 +40,16 @@
                         "y":"index"
                         }
                         }'
+        series-config='{
+                        "firstSerie": {
+                        "type": "scatter",
+                        "name": "Prob. of cancellation",
+                        "xAxisUnit": "Cycles",
+                        "yAxisUnit": "index",
+                        "x": "cycle",
+                        "y":"Prob"
+                        }
+                        }'
         default-series-config='{
                                 "x": "Cycles",
                                 "xMin": "dynamic",
@@ -50,8 +61,7 @@
     >
     </px-vis-xy-chart>
 
-
-    <h3>{{engineTable}}</h3>
+    <h3>Cycle details:</h3>
 
 
     <px-data-table table-data="{{cyclesInGraph}}" striped="true" filterable="true" enable-column-reorder="true" enable-column-resize="true">

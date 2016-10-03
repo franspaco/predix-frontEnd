@@ -20,19 +20,21 @@ function consumeEngines($scope, $http){
             var selectedEngine = e.detail;
             $scope.currentESN = selectedEngine.textValue;
             //console.log($scope.currentESN);
-            consumeOneEngin($scope, $http, $scope.currentESN);
+            var prevCycles = document.getElementById('prevCycles').value;
+            consumeOneEngin($scope, $http, $scope.currentESN, prevCycles);
             consumeEngineState($scope, $http, $scope.currentESN);
 
         });
 
-        function consumeOneEngin($scope, $http, currentESN){
+        function consumeOneEngin($scope, $http, currentESN, prevCycles){
             $http({
                 method: 'GET',
-                url: 'https://semi42.run.aws-usw02-pr.ice.predix.io/engines/'+currentESN+'/20/1/2000',
+                url: 'https://semi42.run.aws-usw02-pr.ice.predix.io/engines/' + currentESN + '/' + prevCycles + '/1/2000',
                 headers: {
                 }
             }).
             success(function(data) {
+              console.log('https://semi42.run.aws-usw02-pr.ice.predix.io/engines/' + currentESN + '/' + prevCycles + '/1/2000');
                 //console.log('https://semi42.run.aws-usw02-pr.ice.predix.io/engines/'+currentESN+'/20/1/2000');
                 //console.log(data.cycles);
                 $scope.cyclesInGraph= data.cycles;
